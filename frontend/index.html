@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PoshDev MintStation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <img src="https://api.iconify.design/mdi:rocket-launch-outline.svg" alt="Logo">
+    <h1>PoshDev MintStation</h1>
+  </header>
+
+  <div class="container">
+    <h2> Mint Your NFT Instantly</h2>
+
+    <input type="text" id="nftName" placeholder="Enter NFT name" />
+    <input type="url" id="nftImageUrl" placeholder="Enter NFT image URL" />
+    <button id="mintBtn">Mint NFT</button>
+
+    <img id="nftPreview" src="" alt="NFT Preview" style="display: none;" />
+
+    <div id="statusMessage"></div>
+  </div>
+
+<!-- Ethers v6 UMD bundle -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.8.1/dist/ethers.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

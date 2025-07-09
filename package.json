@@ -1,0 +1,20 @@
+{
+  "name": "frontend-nft",
+  "version": "1.0.0",
+  "description": "Frontend for PoshDevNFT",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "author": "PoshDev",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.0.0",
+    "@openzeppelin/contracts": "^5.3.0",
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.1",
+    "ethers": "^6.15.0"
+  }
+}
