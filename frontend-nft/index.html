@@ -3,24 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PoshDev MintStation</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Mint Station - PoshDev</title>
+
+  <!-- Load ethers.js -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+  <!-- Load your JS file -->
+  <script defer src="app.js"></script>
+
+  <!-- Optional styling -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      text-align: center;
+      padding: 2rem;
+    }
+    input, button {
+      padding: 0.7rem;
+      font-size: 16px;
+      margin: 0.5rem;
+      border-radius: 5px;
+    }
+    input {
+      width: 300px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #mintResult img {
+      margin-top: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>PoshDev<br />MintStation</h1>
 
-    <button id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
-    <p id="walletStatus">Not connected</p>
+  <h1>PoshDev MintStation</h1>
 
-    <h2>Mint Your NFT Instantly</h2>
+  <p id="walletStatus"> Not connected</p>
+  <button onclick="connectWallet()">Connect Wallet</button>
 
-    <input type="text" id="nftName" placeholder="Enter NFT name" />
-    <input type="text" id="nftImage" placeholder="Enter NFT image URL" />
-    
-    <button id="mintBtn" onclick="mintNFT()">Mint NFT</button>
-  <div id="mintResult" style="margin-top: 20px;"></div>
+  <div style="margin-top: 30px;">
+    <input type="text" id="nftName" placeholder="NFT Name" /><br />
+    <input type="text" id="nftImage" placeholder="Pinata Image URL" /><br />
+    <button onclick="mintNFT()">Mint NFT</button>
+  </div>
 
-  <script src="app.js" defer></script>
+  <div id="mintResult" style="margin-top: 30px;"></div>
+
 </body>
 </html>
