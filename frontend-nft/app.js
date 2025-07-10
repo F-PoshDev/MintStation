@@ -586,17 +586,20 @@ const CONTRACT_ABI =  [
       "type": "function"
     }
   ];
-connectButton.onclick = async () => {
-  if (typeof window.ethereum !== "undefined") {
+async function connectWallet() {
+  if (window.ethereum) {
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-    
-    } catch (err) {
-      console.error(err);
-      statusDisplay.textContent = "❌ Wallet connection failed.";
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("Connected:", accounts[0]);
+      alert("Connected: " + accounts[0]);
+    } catch (error) {
+      console.error("User denied connection:", error);
     }
   } else {
-    alert("Please install MetaMask.");
+    alert("Please install MetaMask!");
   }
-};
+}
+
 
