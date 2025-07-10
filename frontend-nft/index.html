@@ -2,26 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PoshDev MintStation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mint Station</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>PoshDev MintStation</h1>
 
-    <button id="connectBtn"> Connect Wallet</button>
-    <p id="walletAddress" class="status">Not connected</p>
+  <h1>Mint Station</h1>
 
-    <h2>Mint Your NFT Instantly</h2>
+  <button onclick="connectWallet()">Connect Wallet</button>
+  <button onclick="mintNFT()">Mint NFT</button>
 
-    <input id="nftName" type="text" placeholder="Enter NFT name" />
-    <input id="nftImage" type="text" placeholder="Enter NFT image URL" />
-    <button id="mintNFT">Mint NFT</button>
-    <p id="status" class="status"></p>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <script src="app.js" defer></script>
 </body>
 </html>

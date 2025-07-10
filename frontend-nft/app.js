@@ -602,4 +602,9 @@ async function connectWallet() {
   }
 }
 
+async function mintNFT() {
+  alert("Mint NFT clicked");
+  // your mint logic here
+}
+
 
