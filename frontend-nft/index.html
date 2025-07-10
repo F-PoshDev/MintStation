@@ -3,66 +3,145 @@
 <head>
   <meta charset="UTF-8" />
   <title>Mint Station</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Load tsParticles background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+
+  <!-- Load ethers.js for Web3 -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+  <!-- Load app.js -->
   <script defer src="app.js"></script>
 
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       background-color: black;
-      color: white;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Stay behind content */
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      min-height: 100vh;
+      color: white;
+      text-align: center;
       padding: 20px;
     }
 
     h1 {
       color: #00ff99;
+      font-size: 2.5rem;
     }
 
-    input {
+    input, button {
       padding: 10px;
-      width: 300px;
       margin: 10px;
       border-radius: 5px;
       border: none;
+      font-size: 16px;
+    }
+
+    input {
+      width: 300px;
     }
 
     button {
       background-color: #00ff99;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
       color: black;
-      border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px;
     }
 
     #mintResult img {
+      margin-top: 20px;
       width: 300px;
-      margin-top: 15px;
       border-radius: 10px;
+      box-shadow: 0 0 15px #00ff99;
     }
 
     #walletStatus {
-      margin-bottom: 15px;
-      font-size: 16px;
+      font-size: 1rem;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <h1> PoshDev Mint Station</h1>
 
-  <p id="walletStatus"> Not connected</p>
-  <button onclick="connectWallet()">Connect Wallet</button>
+  <!-- Particle background canvas -->
+  <div id="tsparticles"></div>
 
-  <input type="text" id="nftName" placeholder="Enter NFT Name" />
-  <input type="text" id="nftImage" placeholder="Paste Pinata Image URL" />
-  <button onclick="mintNFT()">Mint NFT</button>
+  <!-- Main Mint Station UI -->
+  <div class="container">
+    <h1> PoshDev Mint Station</h1>
 
-  <div id="mintResult"></div>
+    <p id="walletStatus"> Not connected</p>
+    <button onclick="connectWallet()">Connect Wallet</button>
+
+    <input type="text" id="nftName" placeholder="Enter NFT Name" />
+    <input type="text" id="nftImage" placeholder="Paste Pinata Image URL" />
+    <button onclick="mintNFT()">Mint NFT</button>
+
+    <div id="mintResult"></div>
+  </div>
+
+  <script>
+    // tsParticles config
+    tsParticles.load("tsparticles", {
+      background: {
+        color: { value: "#000000" }
+      },
+      fpsLimit: 60,
+      particles: {
+        color: { value: "#00ff99" },
+        links: {
+          enable: true,
+          color: "#00ff99",
+          distance: 150,
+          opacity: 0.5,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1,
+          direction: "none",
+          outModes: { default: "bounce" }
+        },
+        number: {
+          value: 60,
+          density: {
+            enable: true,
+            area: 800
+          }
+        },
+        opacity: {
+          value: 0.3
+        },
+        shape: {
+          type: "circle"
+        },
+        size: {
+          value: { min: 1, max: 4 }
+        }
+      },
+      detectRetina: true
+    });
+  </script>
 </body>
 </html>
