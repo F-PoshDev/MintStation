@@ -1,6 +1,6 @@
 const contractAddress = "0xad769BD0c3242dB9c2ce0374ec16BcBfeA444d9f";
-
-const abi = [
+const contractABI = [ 
+  // Only the relevant part (mint function) is shown to keep it simple
   {
     "inputs": [
       {
@@ -23,63 +23,53 @@ const abi = [
 ];
 
 let signer;
+let contract;
 
 async function connectWallet() {
-  if (window.ethereum) {
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      signer = provider.getSigner();
-      const account = await signer.getAddress();
-      document.getElementById('walletStatus').innerText = "Connected: " + account;
-      console.log("Connected:", account);
-    } catch (err) {
-      console.error("Connection error", err);
+  try {
+    if (!window.ethereum) {
+      alert("Please install MetaMask!");
+      return;
     }
-  } else {
-    alert("Please install MetaMask!");
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    signer = provider.getSigner();
+    contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+    const address = await signer.getAddress();
+    document.getElementById("walletStatus").innerText = `Connected: ${address.slice(0, 6)}...${address.slice(-4)}`;
+    console.log("Connected to:", address);
+  } catch (error) {
+    console.error("Connection error", error);
+    document.getElementById("walletStatus").innerText = "Connection failed";
   }
 }
 
 async function mintNFT() {
-  const imageURL = document.getElementById("nftImage").value;
-  const name = document.getElementById("nftName").value;
+  const nameInput = document.getElementById("nftName");
+  const urlInput = document.getElementById("nftURL");
+  const status = document.getElementById("mintStatus");
 
-  if (!imageURL || !name) {
-    alert("Please enter both name and image URL");
+  if (!nameInput || !urlInput) {
+    console.error("Input fields missing.");
     return;
   }
 
-  const metadata = {
-    name: name,
-    description: "Minted from PoshDev MintStation",
-    image: imageURL
-  };
+  const tokenURI = urlInput.value.trim();
 
-  // Option 1: You already uploaded metadata.json to Pinata → use that tokenURI directly
-  // const tokenURI = "ipfs://QmYourMetadataHash"
-
-  // Option 2: You just use the image directly for now (not recommended for production)
-  const tokenURI = imageURL;
+  if (!tokenURI) {
+    status.innerText = "Please provide an image URL.";
+    return;
+  }
 
   try {
-    const contract = new ethers.Contract(contractAddress, abi, signer);
     const tx = await contract.mint(tokenURI);
-    const receipt = await tx.wait();
-
-    const mintedEvent = receipt.events.find(e => e.event === "Transfer");
-    const tokenId = mintedEvent?.args?.tokenId?.toString();
-
-    // Show success
-    document.getElementById('mintResult').innerHTML = `
-      ✅ <b>Minted NFT #${tokenId}</b><br/>
-      <img src="${imageURL}" width="200" style="margin-top: 10px; border-radius: 10px;"><br/><br/>
-      <a href="https://sepolia.etherscan.io/tx/${tx.hash}" target="_blank">🔗 View on SepoliaScan</a>
-    `;
-
-    console.log("Minted token:", tokenId);
+    status.innerText = "Minting in progress... please wait";
+    await tx.wait();
+    status.innerText = `✅ Minted NFT successfully!\nTransaction Hash: ${tx.hash}`;
   } catch (err) {
     console.error("Minting failed", err);
-    alert("Minting failed. See console.");
+    status.innerText = "❌ Minting failed. Check console for details.";
   }
 }
