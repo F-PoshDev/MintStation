@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mint Station</title>
+  <title>PoshDev MintStation</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>PoshDev<br />MintStation</h1>
 
-  <h1>Mint Station</h1>
+    <button id="connectBtn" onclick="connectWallet()">🔌 Connect Wallet</button>
+    <p id="walletStatus">Not connected</p>
 
-  <button onclick="connectWallet()">Connect Wallet</button>
-  <button onclick="mintNFT()">Mint NFT</button>
+    <h2>Mint Your NFT Instantly</h2>
+
+    <input type="text" id="nftName" placeholder="Enter NFT name" />
+    <input type="text" id="nftImage" placeholder="Enter NFT image URL" />
+    
+    <button id="mintBtn" onclick="mintNFT()">Mint NFT</button>
+  </div>
 
   <script src="app.js" defer></script>
 </body>

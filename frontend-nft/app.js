@@ -590,21 +590,28 @@ async function connectWallet() {
   if (window.ethereum) {
     try {
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: 'eth_requestAccounts'
       });
-      console.log("Connected:", accounts[0]);
-      alert("Connected: " + accounts[0]);
+      console.log('Connected:', accounts[0]);
+      document.getElementById('walletStatus').innerText = 'Connected: ' + accounts[0];
     } catch (error) {
-      console.error("User denied connection:", error);
+      console.error('User rejected connection', error);
     }
   } else {
-    alert("Please install MetaMask!");
+    alert('Please install MetaMask!');
   }
 }
 
 async function mintNFT() {
-  alert("Mint NFT clicked");
+  const name = document.getElementById('nftName').value;
+  const image = document.getElementById('nftImage').value;
+  if (!name || !image) {
+    alert('Please enter both name and image URL');
+    return;
+  }
+  alert(`Minting NFT: ${name}`);
   // your mint logic here
 }
+
 
 
