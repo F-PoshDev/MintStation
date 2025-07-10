@@ -3,144 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PoshDev MintStation</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Mint Station - PoshDev</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #000;
-      color: #fff;
-      position: relative;
-      z-index: 1;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      text-align: center;
     }
-
     #tsparticles {
       position: fixed;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: -1;
     }
-
-    .container {
-      max-width: 500px;
-      margin: 100px auto;
-      padding: 40px;
-      border-radius: 12px;
-      background-color: rgba(0, 0, 0, 0.9);
-      text-align: center;
+    main {
       position: relative;
-      z-index: 2;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      z-index: 1;
+      padding: 40px;
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: cyan;
-    }
-
     button {
-      background-color: cyan;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 15px;
+      background-color: #00ffae;
       color: black;
       border: none;
-      padding: 12px 24px;
-      margin-top: 10px;
-      font-size: 16px;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
     }
-
     input {
-      width: 100%;
       padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-
-    #status {
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    #mintedNFT {
+      width: 60%;
       margin-top: 20px;
+      border-radius: 4px;
+      border: none;
     }
-
-    #mintedNFT img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-top: 10px;
+    img {
+      margin-top: 30px;
+      width: 200px;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
-
-  <!-- tsParticles background -->
   <div id="tsparticles"></div>
-
-  <!-- UI container -->
-  <div class="container">
-    <h1>PoshDev MintStation</h1>
+  <main>
+    <h1>Mint Station</h1>
     <button onclick="connectWallet()">Connect Wallet</button>
-    <p id="status">Not connected</p>
+    <p id="walletAddress">Not connected</p>
 
-    <h2>Mint Your NFT Instantly</h2>
-    <input type="text" id="nftName" placeholder="Enter NFT name" />
-    <input type="text" id="nftUrl" placeholder="Enter NFT image URL" />
+    <input type="text" id="nftUrl" placeholder="Enter NFT Image URL" />
+    <br/>
     <button onclick="mintNFT()">Mint NFT</button>
 
     <div id="mintedNFT"></div>
-  </div>
+  </main>
 
-  <!-- tsParticles library -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-
-  <!-- tsParticles config -->
+  <!-- Particle background -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script>
     tsParticles.load("tsparticles", {
       background: {
-        color: { value: "#000000" }
+        color: { value: "#000" }
       },
       fpsLimit: 60,
       particles: {
-        color: { value: "#00ffff" },
-        links: {
-          enable: true,
-          color: "#00ffff",
-          distance: 150,
-          opacity: 0.5,
-          width: 1
+        number: { value: 60 },
+        color: { value: "#00ffae" },
+        shape: { type: "circle" },
+        opacity: {
+          value: 0.5,
+          random: true
+        },
+        size: {
+          value: 3,
+          random: true
         },
         move: {
           enable: true,
           speed: 1,
           direction: "none",
-          outModes: { default: "bounce" }
-        },
-        number: {
-          value: 60,
-          density: {
-            enable: true,
-            area: 800
-          }
-        },
-        opacity: { value: 0.3 },
-        shape: { type: "circle" },
-        size: { value: { min: 1, max: 4 } }
+          outMode: "bounce"
+        }
       },
       detectRetina: true
     });
   </script>
 
- <!-- Load Ethers.js from CDN -->
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <!-- Ethers.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
-<!-- Load your app.js -->
-<script src="app.js"></script>
+  <!-- Your main app logic -->
+  <script src="app.js"></script>
 </body>
 </html>
-
