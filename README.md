@@ -1,13 +1,12 @@
-# Sample Hardhat Project
+# 🎯 MintStation - NFT Minting dApp
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+A sleek NFT minting dApp built with Solidity, Hardhat, and Ether.js.
 
-Try running some of the following tasks:
+- ✅ Users can mint NFTs directly from the UI
+- 🧠 Smart contract deployed on Sepolia testnet
+- 🌐 Integrated with MetaMask
+- 💻 Clean UI + Mint success feedback
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
+🔗 Live demo: [mint-station-omega.vercel.app](https://mint-station-omega.vercel.app)
+
+🚀 Tech Stack: Solidity • Hardhat • Ether.js • HTML • CSS
